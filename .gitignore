@@ -1,0 +1,43 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Runtime
+*.pid
+*.port
+
+# Environment
+.env
+.env.*
+
+# Generated sources (keep in version control after initial generation)
+# Uncomment below line if you want to ignore generated sources
+# src/generated-db-entities/
+
+# Test results
+bin/
+out/
+
+# Temporary
+*.tmp
+*.temp
+

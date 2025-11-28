@@ -1,0 +1,124 @@
+plugins {
+    id 'org.springframework.boot' version '3.3.5'
+    id 'nu.studer.jooq' version '9.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.shashank'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Spring dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // DB dependencies
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.jooq:jooq'
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // Database driver for JOOQ code generation
+    jooqGenerator 'org.postgresql:postgresql'
+
+    // Swagger/OpenAPI dependencies
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-common:2.2.0'
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// JOOQ Code Generation Configuration
+task jooqGen {
+    dependsOn += 'generateJooq'
+}
+
+jooq {
+    configurations {
+        main {
+            generateSchemaSourceOnCompilation = false
+            generationTool {
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:35434/shashankdb'
+                    user = 'shashank'
+                    password = 'shashank'
+                    properties {
+                        property {
+                            key = 'useSSL'
+                            value = 'false'
+                        }
+                    }
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                        outputSchemaToDefault = true
+                        excludes = 'DATABASECHANGELOG|DATABASECHANGELOGLOCK'
+                    }
+                    generate {
+                        relations = false
+                        deprecated = false
+                        records = true
+                        pojos = true
+                        daos = true
+                        springAnnotations = true
+                        javaTimeTypes = true
+                        fluentSetters = true
+                        pojosEqualsAndHashCode = true
+                    }
+                    target {
+                        packageName = 'com.shashank.project.db.jooq'
+                        directory = 'src/generated-db-entities/java/'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Include generated sources
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/generated-db-entities/java'
+        }
+    }
+}
+
+bootRun {
+    systemProperties['spring.profiles.active'] = project.gradle.startParameter.systemPropertiesArgs['spring.profiles.active'] ?: 'local'
+}
+
+bootJar {
+    archiveFileName = "shashank-project.jar"
+}
+
