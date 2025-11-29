@@ -4,6 +4,7 @@
 package com.shashank.project.db.jooq;
 
 
+import com.shashank.project.db.jooq.tables.Contact;
 import com.shashank.project.db.jooq.tables.PgpArmorHeaders;
 import com.shashank.project.db.jooq.tables.User;
 import com.shashank.project.db.jooq.tables.records.PgpArmorHeadersRecord;
@@ -31,6 +32,11 @@ public class DefaultSchema extends SchemaImpl {
      * The reference instance of <code>DEFAULT_SCHEMA</code>
      */
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
+
+    /**
+     * The table <code>contact</code>.
+     */
+    public final Contact CONTACT = Contact.CONTACT;
 
     /**
      * The table <code>pgp_armor_headers</code>.
@@ -92,6 +98,7 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Contact.CONTACT,
             PgpArmorHeaders.PGP_ARMOR_HEADERS,
             User.USER
         );

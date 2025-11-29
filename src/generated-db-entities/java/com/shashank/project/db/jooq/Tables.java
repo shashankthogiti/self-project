@@ -4,6 +4,7 @@
 package com.shashank.project.db.jooq;
 
 
+import com.shashank.project.db.jooq.tables.Contact;
 import com.shashank.project.db.jooq.tables.PgpArmorHeaders;
 import com.shashank.project.db.jooq.tables.User;
 import com.shashank.project.db.jooq.tables.records.PgpArmorHeadersRecord;
@@ -18,6 +19,11 @@ import org.jooq.Result;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>contact</code>.
+     */
+    public static final Contact CONTACT = Contact.CONTACT;
 
     /**
      * The table <code>pgp_armor_headers</code>.

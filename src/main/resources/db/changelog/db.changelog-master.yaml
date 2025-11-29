@@ -3,4 +3,6 @@ databaseChangeLog:
       file: db/changelog/db.changelog-202511281200-create-user-table.xml
   - include:
       file: db/changelog/db.changelog-202511281201-insert-admin-user.xml
+  - include:
+      file: db/changelog/db.changelog-202511291430-create-contact-us-table.xml
 
