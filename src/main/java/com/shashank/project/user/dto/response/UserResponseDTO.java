@@ -1,4 +1,4 @@
-package com.shashank.project.user.dto;
+package com.shashank.project.user.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,16 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
- * Data Transfer Object for User entity.
+ * Response DTO for user details.
+ *
+ * @author Shashank
+ * @since 1.0.0
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class UserResponseDTO {
     private UUID id;
     private String name;
     private String email;

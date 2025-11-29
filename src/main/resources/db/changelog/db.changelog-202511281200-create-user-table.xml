@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="db.changelog-202511281200-create-user-table.xml" author="shashank">
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+            <![CDATA[
+            -- Enable UUID extension if not already enabled
+            CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+            -- Create the user table
+            CREATE TABLE "user" (
+                id uuid NOT NULL DEFAULT gen_random_uuid(),
+                name varchar(255) NOT NULL,
+                email varchar(255) NOT NULL,
+                password varchar(255) NOT NULL,
+                mobile_number varchar(20) NULL,
+                is_active bool NOT NULL DEFAULT true,
+                created_on timestamp with time zone NOT NULL DEFAULT now(),
+                updated_on timestamp with time zone NULL,
+                created_by uuid NULL,
+                updated_by uuid NULL,
+                CONSTRAINT user_pkey PRIMARY KEY (id),
+                CONSTRAINT user_email_unique UNIQUE (email)
+            );
+
+            -- Add self-referential foreign keys
+            ALTER TABLE "user" ADD CONSTRAINT fk_user_created_by 
+                FOREIGN KEY (created_by) REFERENCES "user"(id) ON DELETE SET NULL;
+            ALTER TABLE "user" ADD CONSTRAINT fk_user_updated_by 
+                FOREIGN KEY (updated_by) REFERENCES "user"(id) ON DELETE SET NULL;
+
+            -- Create indexes for commonly queried columns
+            CREATE INDEX idx_user_email ON "user"(email);
+            CREATE INDEX idx_user_is_active ON "user"(is_active);
+            CREATE INDEX idx_user_created_on ON "user"(created_on);
+]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+

@@ -59,7 +59,7 @@ public class Tables {
     }
 
     /**
-     * Stores user information for the Shashank Project
+     * The table <code>user</code>.
      */
     public static final User USER = User.USER;
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="db.changelog-202511281201-insert-admin-user.xml" author="shashank">
+        <comment>Insert a sample admin user (password is BCrypt hash of 'admin123')</comment>
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+            <![CDATA[
+            INSERT INTO "user" (id, name, email, password, mobile_number, is_active, created_on)
+            VALUES (
+                gen_random_uuid(),
+                'Admin User',
+                'admin@shashank.com',
+                '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZRGdjGj/n3Rtrj/IqRvKvH4LCiGy.',
+                '9999999999',
+                true,
+                now()
+            );
+]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+

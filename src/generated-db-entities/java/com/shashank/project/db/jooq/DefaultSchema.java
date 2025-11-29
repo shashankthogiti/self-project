@@ -72,7 +72,7 @@ public class DefaultSchema extends SchemaImpl {
     }
 
     /**
-     * Stores user information for the Shashank Project
+     * The table <code>user</code>.
      */
     public final User USER = User.USER;
 

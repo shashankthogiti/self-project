@@ -1,6 +1,6 @@
 # Shashank Project
 
-A Spring Boot application with PostgreSQL, JOOQ, and Swagger UI.
+A Spring Boot application with PostgreSQL, JOOQ, Liquibase, and Swagger UI.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ my-project/
 │   │   │   ├── user/            # User module (Controller, Service, Repository, DTOs)
 │   │   │   └── ShashankProjectApplication.java
 │   │   └── resources/
-│   │       ├── db/init.sql      # Database initialization script
+│   │       ├── db/changelog/    # Liquibase changelog files (XML + YAML)
 │   │       └── application*.properties
 │   └── generated-db-entities/   # JOOQ generated classes (after running jooqGen)
 ├── build.gradle
@@ -109,8 +109,24 @@ docker-compose up --build
 
 The application uses different profiles:
 
-- `local` - For local development (connects to localhost:35432)
+- `local` - For local development (connects to localhost:35434)
 - `docker` - For Docker deployment (connects to shashank-db:5432)
+
+## Database Migrations (Liquibase)
+
+Database schema is managed using Liquibase with XML master changelog and YAML changesets.
+
+### Changelog Structure
+
+```
+src/main/resources/db/changelog/
+├── db.changelog-master.xml           # Master changelog (XML)
+└── changes/
+    ├── 001-create-user-table.yaml    # User table creation (YAML)
+    └── 002-insert-admin-user.yaml    # Admin user seed data (YAML)
+```
+
+Liquibase runs automatically on application startup and applies any pending changesets.
 
 ## Useful Commands
 

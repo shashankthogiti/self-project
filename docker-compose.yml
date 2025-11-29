@@ -19,7 +19,6 @@ services:
       - "35434:5432"
     volumes:
       - shashank_db_data:/var/lib/postgresql/data
-      - ./src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U shashank -d shashankdb"]
       interval: 10s

@@ -25,7 +25,7 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<UserRecord> USER_EMAIL_KEY = Internal.createUniqueKey(User.USER, DSL.name("user_email_key"), new TableField[] { User.USER.EMAIL }, true);
+    public static final UniqueKey<UserRecord> USER_EMAIL_UNIQUE = Internal.createUniqueKey(User.USER, DSL.name("user_email_unique"), new TableField[] { User.USER.EMAIL }, true);
     public static final UniqueKey<UserRecord> USER_PKEY = Internal.createUniqueKey(User.USER, DSL.name("user_pkey"), new TableField[] { User.USER.ID }, true);
 
     // -------------------------------------------------------------------------
