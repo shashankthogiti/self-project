@@ -11,10 +11,10 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TableCreateResponseDTO {
+public class TableUpdateResponseDTO {
 
     private UUID id;
     private String message;
-    private Boolean success;
+    private Boolean isActive;
 
 }

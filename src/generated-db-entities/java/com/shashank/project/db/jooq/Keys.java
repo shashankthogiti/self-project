@@ -5,8 +5,10 @@ package com.shashank.project.db.jooq;
 
 
 import com.shashank.project.db.jooq.tables.Contact;
+import com.shashank.project.db.jooq.tables.Table;
 import com.shashank.project.db.jooq.tables.User;
 import com.shashank.project.db.jooq.tables.records.ContactRecord;
+import com.shashank.project.db.jooq.tables.records.TableRecord;
 import com.shashank.project.db.jooq.tables.records.UserRecord;
 
 import org.jooq.ForeignKey;
@@ -28,6 +30,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<ContactRecord> CONTACT_PKEY = Internal.createUniqueKey(Contact.CONTACT, DSL.name("contact_pkey"), new TableField[] { Contact.CONTACT.ID }, true);
+    public static final UniqueKey<TableRecord> TABLE_PKEY = Internal.createUniqueKey(Table.TABLE, DSL.name("table_pkey"), new TableField[] { Table.TABLE.ID }, true);
     public static final UniqueKey<UserRecord> USER_EMAIL_UNIQUE = Internal.createUniqueKey(User.USER, DSL.name("user_email_unique"), new TableField[] { User.USER.EMAIL }, true);
     public static final UniqueKey<UserRecord> USER_PKEY = Internal.createUniqueKey(User.USER, DSL.name("user_pkey"), new TableField[] { User.USER.ID }, true);
 

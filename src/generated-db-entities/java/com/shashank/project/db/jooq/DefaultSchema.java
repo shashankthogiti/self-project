@@ -6,6 +6,7 @@ package com.shashank.project.db.jooq;
 
 import com.shashank.project.db.jooq.tables.Contact;
 import com.shashank.project.db.jooq.tables.PgpArmorHeaders;
+import com.shashank.project.db.jooq.tables.Table;
 import com.shashank.project.db.jooq.tables.User;
 import com.shashank.project.db.jooq.tables.records.PgpArmorHeadersRecord;
 
@@ -16,7 +17,6 @@ import org.jooq.Catalog;
 import org.jooq.Configuration;
 import org.jooq.Field;
 import org.jooq.Result;
-import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -78,6 +78,11 @@ public class DefaultSchema extends SchemaImpl {
     }
 
     /**
+     * The table <code>table</code>.
+     */
+    public final Table TABLE = Table.TABLE;
+
+    /**
      * The table <code>user</code>.
      */
     public final User USER = User.USER;
@@ -96,10 +101,11 @@ public class DefaultSchema extends SchemaImpl {
     }
 
     @Override
-    public final List<Table<?>> getTables() {
+    public final List<org.jooq.Table<?>> getTables() {
         return Arrays.asList(
             Contact.CONTACT,
             PgpArmorHeaders.PGP_ARMOR_HEADERS,
+            Table.TABLE,
             User.USER
         );
     }

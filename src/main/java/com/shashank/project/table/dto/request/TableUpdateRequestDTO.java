@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TableCreateRequestDTO {
+public class TableUpdateRequestDTO {
 
     private String name;
     private String email;
     private String mobileNumber;
+    private boolean isActive;
 
 }

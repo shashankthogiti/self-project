@@ -6,6 +6,7 @@ package com.shashank.project.db.jooq;
 
 import com.shashank.project.db.jooq.tables.Contact;
 import com.shashank.project.db.jooq.tables.PgpArmorHeaders;
+import com.shashank.project.db.jooq.tables.Table;
 import com.shashank.project.db.jooq.tables.User;
 import com.shashank.project.db.jooq.tables.records.PgpArmorHeadersRecord;
 
@@ -63,6 +64,11 @@ public class Tables {
             __1
         );
     }
+
+    /**
+     * The table <code>table</code>.
+     */
+    public static final Table TABLE = Table.TABLE;
 
     /**
      * The table <code>user</code>.
